@@ -2,7 +2,8 @@ import random
 from ship import Ship
 
 
-# The Player class has two boards - one holding their ship locations, and one holding the opponent's guesses
+# The Player class has two boards - board holds ship locations, display_board holds opponent's guesses
+# The ship's symbol appears on the display board when hit
 class Player:
     def __init__(self, name):
         self.name = name
