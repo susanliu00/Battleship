@@ -2,6 +2,7 @@ import random
 from ship import Ship
 
 
+# The Player class has two boards - one holding their ship locations, and one holding the opponent's guesses
 class Player:
     def __init__(self, name):
         self.name = name
@@ -104,6 +105,8 @@ class Player:
                 else:
                     break
 
+    # Given a ship and start/endpoints, it validates the position. If it does not overlap,
+    # is within the board, and has the right length, it adds it to the player's board
     def validate_and_place_ship(self, ship, start, end):
         if (
             end[0] < 0
@@ -133,6 +136,7 @@ class Player:
         self.ships[ship.symbol] = ship
         return "Valid"
 
+    # For each ship it selects a random start position and direction. If valid, it places it
     def place_random_ships(self):
         for s in self.required_ships:
             while True:
@@ -173,6 +177,8 @@ class Player:
             else:
                 return row, col
 
+    # Checks the opponent's guess and updates the display board accordingly. It updates with the
+    # ship's symbol since we announce which ship is hit.
     def check_guess(self, r, c):
         s = self.board[r][c]
         if s == ".":
@@ -187,5 +193,7 @@ class Player:
                 print("Sank the " + ship.name + "!")
                 del self.ships[s]
 
+    # A ship's size is decremented each time it's hit, and removed from the dict when it reaches 0.
+    # Therefore an empty ship dict means the player has lost
     def lost(self):
         return self.ships == {}
