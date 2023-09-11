@@ -5,7 +5,7 @@ from ship import Ship
 class Player:
     def __init__(self, name):
         self.name = name
-        self.board_size = 3
+        self.board_size = 10
         self.board = [
             ["." for _ in range(self.board_size)] for _ in range(self.board_size)
         ]
@@ -14,12 +14,14 @@ class Player:
         ]
         self.ships = {}
         self.required_ships = [
-            # Ship("Carrier", "C", 5),
-            # Ship("Battleship", "B", 4),
-            # Ship("Destroyer", "D", 3),
-            # Ship("Submarine", "S", 3),
+            Ship("Carrier", "C", 5),
+            Ship("Battleship", "B", 4),
+            Ship("Destroyer", "D", 3),
+            Ship("Submarine", "S", 3),
             Ship("Patrol Boat", "P", 2),
         ]
+        self.ship_map = {"C": 5, "B": 4, "D": 3, "S": 3, "P": 2}
+        self.directions = [[0, 1], [1, 0], [0, -1], [-1, 0]]
 
     def reset_board(self):
         self.board = [
@@ -132,7 +134,6 @@ class Player:
         return "Valid"
 
     def place_random_ships(self):
-        directions = [[0, 1], [1, 0], [0, -1], [-1, 0]]
         for s in self.required_ships:
             while True:
                 r = random.randint(0, self.board_size - 1)
@@ -142,8 +143,8 @@ class Player:
                     s,
                     [r, c],
                     [
-                        r + directions[dir][0] * (s.size - 1),
-                        c + directions[dir][1] * (s.size - 1),
+                        r + self.directions[dir][0] * (s.size - 1),
+                        c + self.directions[dir][1] * (s.size - 1),
                     ],
                 )
                 if msg == "Valid":
@@ -168,7 +169,7 @@ class Player:
             if row < 0 or row >= self.board_size or col < 0 or col >= self.board_size:
                 print("Please enter a coordinate on the board")
             elif other_board[row][col] != ".":
-                print("You already guessed there")
+                print("Already guessed there")
             else:
                 return row, col
 

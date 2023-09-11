@@ -5,15 +5,9 @@ import random
 class Bot(Player):
     def __init__(self):
         super().__init__("Bot")
+        self.possible_guesses = [
+            [r, c] for r in range(self.board_size) for c in range(self.board_size)
+        ]
 
     def place_ships(self):
         self.place_random_ships()
-
-    def make_guess(self, other_board):
-        while True:
-            r = random.randint(0, self.board_size - 1)
-            c = random.randint(0, self.board_size - 1)
-            if other_board[r][c] == ".":
-                break
-        print("Bot guessed [" + str(r) + "," + str(c) + "]")
-        return r, c

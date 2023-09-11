@@ -9,12 +9,7 @@ class Battleship:
         self.nonCurrent = self.player2
 
     def switch(self):
-        if self.current == self.player1:
-            self.current = self.player2
-            self.nonCurrent = self.player1
-        else:
-            self.current = self.player1
-            self.nonCurrent = self.player2
+        self.current, self.nonCurrent = self.nonCurrent, self.current
 
     def play(self):
         self.player1.place_ships()
