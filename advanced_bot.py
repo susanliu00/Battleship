@@ -61,16 +61,21 @@ class AdvancedBot(Bot):
         self.prev_guess = [r, c]
         return r, c
 
-    # Add coordinate to self.found, which holds known ship coordinates
+    # Add coordinate to self.found, which holds known sorted ship coordinates
     def insert_ship_coordinate(self, ship, r, c):
         if self.found[ship][0][0] == r:
             for i in range(len(self.found[ship])):
                 if self.found[ship][i][1] > c:
                     self.found[ship].insert(i, [r, c])
+                    return
+            self.found[ship].append([r, c])
         else:
             for i in range(len(self.found[ship])):
                 if self.found[ship][i][0] > r:
                     self.found[ship].insert(i, [r, c])
+                    return
+
+            self.found[ship].append([r, c])
 
     # If there's no ship information, guess a square next to no misses if possible
     def random_choice(self):

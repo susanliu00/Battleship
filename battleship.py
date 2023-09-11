@@ -15,6 +15,7 @@ class Battleship:
         self.player1.place_ships()
         self.player2.place_ships()
         while not self.current.lost():
+            print("///////////////////////////////")
             print(self.current.name + "'s Turn")
             self.nonCurrent.print_display_board()
             row, col = self.current.make_guess(self.nonCurrent.display_board)
