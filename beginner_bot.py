@@ -2,6 +2,7 @@ from bot import Bot
 import random
 
 
+# Beginner bot will randomly guess from all free squares on the board
 class BeginnerBot(Bot):
     def __init__(self):
         super().__init__()

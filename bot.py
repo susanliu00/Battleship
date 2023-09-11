@@ -1,5 +1,4 @@
 from player import Player
-import random
 
 
 class Bot(Player):
@@ -9,5 +8,6 @@ class Bot(Player):
             [r, c] for r in range(self.board_size) for c in range(self.board_size)
         ]
 
+    # A bot always randomly places ships
     def place_ships(self):
         self.place_random_ships()
